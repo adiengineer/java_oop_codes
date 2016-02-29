@@ -1,0 +1,33 @@
+package tictactoe;
+import java.util.Scanner;
+public class Tester {
+     
+	public static void main(String[] args) 
+	{ int i,mode=0;
+	String input;
+	 String[] inputsp;
+		Scanner sc=new Scanner(System.in);
+          Gameboard g=new Gameboard();
+               Player p=new Player();
+               Computer c=new Computer();
+               
+            for(i=1;i<=9;i++)//ninw times
+            {   if (i%2!=0)//if odd
+                   { input=sc.nextLine().trim();
+            	        inputsp=input.split(" ");
+            	        p.makeamove(Integer.parseInt(inputsp[0]),Integer.parseInt(inputsp[1]), g); //scan the players move
+                   }
+            else 
+                 {  if (i==2)
+            	        c.firstmove(g);
+               
+                	    //middle checking remaining 
+               	     
+                
+                 else if (i!=2&&(i%2==0))
+                    {  c.makewinningmove(g);
+                	 
+                    }
+                 }
+            }
+	}

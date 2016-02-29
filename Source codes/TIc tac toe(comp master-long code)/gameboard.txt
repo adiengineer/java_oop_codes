@@ -1,0 +1,90 @@
+package tictactoe;
+
+public class Gameboard 
+{  
+	char[][] board=new char[3][3];//3x3 grid,
+     Gameboard()
+     {int i,j;
+         for(i=0;i<3;i++)
+         {for(j=0;j<3;j++)
+        	  board[i][j]=' ';
+         }
+     }//filled with zeroes. now give basic behaviour
+
+     public void conductmove(int row,int column,char symbol)
+     {  
+    	 int countX=0,countO=0,i,j,countspace=0;
+    	 if (board[row][column]==' ')
+             board[row][column]=symbol;
+    	     
+    	  if (symbol=='X')
+	    	    System.out.println("You played at:"+row+" "+column);
+	       else
+	    	   System.out.println("COmp played at:"+row+" "+column);
+           //look at error handling latter.now check for a win in row,column or diagonal
+            
+    	     for(i=0;i<3;i++) //checks rowwise
+    	     { for(j=0;j<3;j++)
+    	         { if (board[i][j]=='X')
+    	    	         countX++;
+    	         else if (board[i][j]=='O')
+    	        	     countO++;
+    	         }
+    	            
+    	     if (countX==3)
+    	            {System.out.println("Player 1 wins!");
+    	               break;
+    	            }
+    	            else if (countO==3)
+    	            {System.out.println("Computer wins");
+    	            	break;
+    	            }
+    	            else if(countX!=3 && countO!=3)
+    	            {countX=0;
+    	            	countO=0;
+    	            }
+    	    }//rows checked for win
+    	     
+    	     for(i=0;i<3;i++) //checks columnwise
+    	     { for(j=0;j<3;j++)
+    	         { if (board[j][i]=='X')
+    	    	         countX++;
+    	         else if (board[j][i]=='O')
+    	        	     countO++;
+    	         }
+    	            
+    	     if (countX==3)
+    	            {System.out.println("Player 1 wins!");
+    	               break;
+    	            }
+    	            else if (countO==3)
+    	            {System.out.println("Computer wins");
+    	            	break;
+    	            }
+    	            else if(countX!=3 && countO!=3)
+    	            {countX=0;
+    	            	countO=0;
+    	            }
+    	    } //checks columnwise, now diagonally 
+    	     
+             if (board[0][0]=='X'&& board[1][1]=='X'&&board[2][2]=='X') 
+    	         System.out.println("Player 1 wins!");
+             else  if (board[0][0]=='O'&& board[1][1]=='O'&&board[2][2]=='O') 
+    	         System.out.println("Comp  wins!");//diag 1
+             
+             if (board[0][2]=='X'&& board[1][1]=='X'&&board[2][0]=='X') 
+    	         System.out.println("Player 1 wins!");
+             else  if (board[0][2]=='O'&& board[1][1]=='O'&&board[2][0]=='O') 
+    	         System.out.println("Comp  wins!");//all diagonals checked for win,now check for draw
+             
+             for(i=0;i<3;i++)
+             {for(j=0;j<3;j++)
+                  {  if (board[i][j]==' ')
+            	           countspace++;
+                  }
+             }
+              if (countspace==0)
+            	  System.out.println("Draw");  // accepting a move and result checking done
+              
+     }
+}

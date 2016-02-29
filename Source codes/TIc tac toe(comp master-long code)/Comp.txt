@@ -1,0 +1,344 @@
+package tictactoe;
+
+public class Computer 
+{  char symbol='O';
+      int compfirstrow,compfirstcolumn;
+       public void checkfordanger(Gameboard g)
+       {   int countX=0,i,j,temprow=-5,tempcolumn=-5;
+    	   
+             for(i=0;i<3;i++) //make winning more important.
+             {countX=0;//imp
+        	   temprow=-5;tempcolumn=-5;//imo
+            	 for(j=0;j<3;j++)
+                 { 
+            	 if (g.board[i][j]=='X')
+                 	    countX++;
+                 else if(g.board[i][j]==' ')
+                 { temprow=i;
+                    tempcolumn=j;
+                 }
+                 }
+                 if(countX==2 && (temprow>=0 &&tempcolumn>=0))
+                	 {g.conductmove(temprow, tempcolumn, symbol);
+                	   break;
+                    
+                	 }
+             }// checked through rows.
+               
+                 
+                	 
+                 
+                 if (i==3)//which means nothing found in rows
+                	 {
+                	  for(i=0;i<3;i++)
+                      { countX=0;//imp
+                   	 temprow=-5;tempcolumn=-5;//imo
+                		  for(j=0;j<3;j++)
+                          { 
+                    	  if (g.board[j][i]=='X')
+                          	    countX++;
+                          else if(g.board[j][i]==' ')
+                          { temprow=j;
+                             tempcolumn=i;
+                          }
+                          }
+                          if(countX==2 && (temprow>=0 &&tempcolumn>=0))
+                          	 {g.conductmove(temprow, tempcolumn, symbol);
+                               break;                  
+                         	 }
+                      }   
+                          if (i==3)
+                         	 {countX=0;
+                         	   temprow=-5;tempcolumn=-5;
+                         	 for(i=0,j=0;i<3;i++,j++)
+                             {  
+                         		 if (g.board[i][j]=='X')
+                            	    countX++;
+                             else if (g.board[i][j]==' ')
+                                  { temprow=i;
+                            	     tempcolumn=j;
+                                  }
+                             }
+                             if (countX==2 && (temprow>=0 &&tempcolumn>=0))
+                                {g.conductmove(temprow, tempcolumn, symbol);
+                                   
+                                }               
+                             else 
+                            	 {countX=0;
+                            	 temprow=-5;tempcolumn=-5;//imo
+                            	 for(i=0,j=2;i<3;i++,j--)
+                                 {
+                            		 if (g.board[i][j]=='X')
+                             	    countX++;
+                              else if (g.board[i][j]==' ')
+                                   { temprow=i;
+                             	     tempcolumn=j;
+                                   }
+                                	 
+                                 }
+                                 if (countX==2 && (temprow>=0 &&tempcolumn>=0))
+                                     { g.conductmove(temprow, tempcolumn, symbol);
+                                        
+                                     }
+                                  else 
+                                	  {
+                                	     this.planmove(g);;
+                                	  }
+                                  }
+                              }
+                           }
+                  }
+                         	 
+                	 
+              
+              //checks row danger,now check column danger
+             
+           
+              //checks column danger,now check diagonal danger.
+             
+            
+             
+              //danger reaction done
+       
+       
+       public void makewinningmove(Gameboard g)
+       {
+    	   int countO=0,i,j,temprow=-5,tempcolumn=-5;
+    	   
+           for(i=0;i<3;i++)
+           {    countO=0;//imp
+           temprow=-5;tempcolumn=-5;
+        	   for(j=0;j<3;j++)
+               { 
+        	   if (g.board[i][j]=='O')
+               	    countO++;
+               else if(g.board[i][j]==' ')
+               { temprow=i;
+                  tempcolumn=j;
+               }
+               }
+               if(countO==2 && (temprow>=0 &&tempcolumn>=0))
+              	 {g.conductmove(temprow, tempcolumn, symbol);
+                 break;
+              	 }
+             }    
+               if (i==3)
+              	 {
+              	  for(i=0;i<3;i++)
+                  {countO=0;//imp
+                  temprow=-5;tempcolumn=-5;
+              		  for(j=0;j<3;j++)
+                      {  
+                	  if (g.board[j][i]=='O')
+                      	    countO++;
+                      else if(g.board[j][i]==' ')
+                      { temprow=j;
+                         tempcolumn=i;
+                      }
+                      }
+                      if(countO==2 && (temprow>=0 &&tempcolumn>=0))
+                     	 {g.conductmove(temprow, tempcolumn, symbol);
+                       break;
+                     	 }
+                  }
+                      if (i==3)
+                     	 {
+                     	 for(i=0,j=0;i<3;i++,j++)
+                         {   if (g.board[i][j]=='O')
+                        	    countO++;
+                         else if (g.board[i][j]==' ')
+                              { temprow=i;
+                        	     tempcolumn=j;
+                              }
+                         }
+                         if (countO==2 && (temprow>=0 &&tempcolumn>=0))
+                            {g.conductmove(temprow, tempcolumn, symbol);
+                                         
+                            }
+                         else 
+                        	 {countO=0;
+                        	    temprow=0;tempcolumn=0;
+                        	 for(i=0,j=2;i<3;i++,j--)
+                             { if (g.board[i][j]=='O')
+                         	    countO++;
+                          else if (g.board[i][j]==' ')
+                               { temprow=i;
+                         	     tempcolumn=j;
+                               }
+                            	 
+                             }
+                             if (countO==2 && (temprow>=0 &&tempcolumn>=0))
+                                 {g.conductmove(temprow, tempcolumn, symbol);
+                                  
+                                 }
+                                 
+                              else 
+                            	  {countO=0;  //winning move done, now planning.
+                            	      this.checkfordanger(g);
+                            	  }
+                            	  }
+                        	 }
+                        	 }
+                     	 }
+                     	 
+                   //checks column danger,now check diagonal danger.
+              	 
+              	 
+            //checks row danger,now check column danger
+           
+         
+           
+          
+           
+          
+       
+       
+       public void firstmove(Gameboard g) //called only at first move
+       {  int i,j;
+    	     for(i=0;i<3;i++)
+    	     {for(j=0;j<3;j++)
+    	         { if (g.board[i][j]=='X')
+    	               {  if ((i==0&&(j==0||j==2))||(i==2&&(j==0||j==2)))
+    	        	          {g.conductmove(1,1, symbol);
+    	        	            compfirstrow=1;
+    	        	             compfirstcolumn=1;
+    	        	            break;
+    	        	          }
+    	        	   
+    	               else if (i==1&&j==1)
+    	            	      {g.conductmove(0,0,symbol);
+    	            	      compfirstrow=0;
+ 	        	             compfirstcolumn=0;
+    	            	          break;
+    	            	      }
+    	               else if ((i==0&&j==1)||(i==1&&j==0))
+    	                      { g.conductmove(0,0,symbol);
+    	                      compfirstrow=0;
+ 	        	             compfirstcolumn=0;
+    	            	            break;
+    	                      }
+    	         
+    	               else if ((i==2&&j==1)||(i==1&&j==2))
+	                      { g.conductmove(2,2,symbol);
+	                      compfirstrow=2;
+	        	             compfirstcolumn=2;
+	            	            break;
+	                      }
+    	              }
+    	         }
+     }
+       }  //first moves taught and remebered.
+       
+       
+       public void checkmiddle(Gameboard g)
+       { if (g.board[1][1]==' ')
+    	    {g.conductmove(1,1,symbol);
+    	    }        
+       else 
+           { this.checkfordanger(g);
+    	   
+           }
+       
+       }
+       
+       public void planmove(Gameboard g) //if no remarkable move found then think what to play
+       { 
+             int i,j,countX=0,temprow=-5,tempcolumn=-5,diagcount=0;       
+    	           for(i=0;i<3;i++)
+    	           {countX=0;
+    	        	   for(j=0;j<3;j++)
+    	               {  if (g.board[i][j]=='X')
+    	        	         countX++;
+    	               }
+    	                 if (countX==0)
+    	                 {temprow=i;
+    	                   
+    	                  break;
+    	                 }
+    	           }
+    	         
+    	           for(i=0;i<3;i++)
+    	           {countX=0;
+    	        	   for(j=0;j<3;j++)
+    	               {  if (g.board[j][i]=='X')
+    	        	         countX++;
+    	               }
+    	                 if (countX==0)
+    	                 {tempcolumn=i;
+    	                  break;
+    	                 }
+    	           }
+    	           
+    	           if (temprow>=0 &&tempcolumn>=0)
+    	           {  if (compfirstrow==1&&compfirstcolumn==1)
+    	        	   {if (g.board[temprow][tempcolumn]==' ')
+    	               {g.conductmove(temprow, tempcolumn, symbol);
+    	        	
+    	               }
+    	           else
+    	            {  if (tempcolumn-1>=0)
+    	            	g.conductmove(temprow, tempcolumn-1, symbol);
+    	            else if (tempcolumn+1<3) 
+    	            	 g.conductmove(temprow, tempcolumn+1, symbol);
+    	            }
+    	        	   }
+    	           else if (compfirstrow==0&&compfirstcolumn==0)
+    	           {   
+	           
+	            { if (tempcolumn-1>=0)
+	            	g.conductmove(temprow, tempcolumn-1, symbol);
+	            else if (tempcolumn+1<3) 
+	            	 g.conductmove(temprow, tempcolumn+1, symbol);
+	            
+	           else if  (g.board[temprow][tempcolumn]==' ')
+               {g.conductmove(temprow, tempcolumn, symbol);
+	        	
+               }	   
+    	           }
+    	           }
+    	           }
+    	           else
+    	           {for(i=0,j=0;i<3;i++,j++)
+    	               {   if (g.board[i][j]=='X')
+    	            	       diagcount++;
+    	               else if (g.board[i][j]==' ')
+    	            	        {temprow=i;tempcolumn=j;}
+    	               }
+    	                if (diagcount==0)
+    	                {    g.conductmove(temprow, tempcolumn, symbol);   
+    	               
+    	                }
+    	                
+    	                for(i=0,j=2;i<3;i++,j--)
+     	               {   if (g.board[i][j]=='X')
+     	            	       diagcount++;
+     	               else if (g.board[i][j]==' ')
+     	            	        {temprow=i;tempcolumn=j;}
+     	               }
+     	                if (diagcount==0)
+     	                {    g.conductmove(temprow, tempcolumn, symbol);   
+     	               
+     	                }
+     	                else
+     	                {this.lastresort(g);
+     	                	
+     	                }
+    	           }  
+          }
+       
+       
+       public void lastresort(Gameboard g)
+       {  int i,j;
+           boolean moveconducted=false;
+    	     for(i=0;i<3;i++)
+    	     {for(j=0;j<3;j++)
+    	          {  if (g.board[i][j]==' ') 
+    	              {  g.conductmove(i, j, symbol);
+    	                   moveconducted=true;
+    	        	      break;
+    	              }
+    	          }
+    	        if (moveconducted==true)
+    	        	break;
+    	     }
+       }

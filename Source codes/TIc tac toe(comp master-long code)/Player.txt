@@ -1,0 +1,9 @@
+package tictactoe;
+
+public class Player 
+{ char symbol='X';
+     
+    public void makeamove(int row ,int column,Gameboard g)
+    {   g.conductmove(row, column, symbol);//player will fill asked cell with X 
+    }
+}
